@@ -1,0 +1,11 @@
+{
+  "name": "GexNW",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/static/index.html",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  }
+}

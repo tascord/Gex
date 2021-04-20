@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/style/style.css">
+    <script src="/static/scripts/p5.min.js"></script>
+    <script src="/static/scripts/gex.js" defer></script>
+
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="inner">
+
+            <h1>GICT &mdash; Gex Image Creation Tool</h1>
+            <div class="container">
+
+                <div class="box">
+                    <h3>Stats</h3>
+                    <table class="stats">
+                        <tr>
+                            <th>G/s</th>
+                            <th>Square Gex Resolution</th>
+                            <th>Image Size</th>
+                        </tr>
+                        <tr>
+                            <td stat="gps">0</td>
+                            <td stat="resolution">0x0</td>
+                            <td stat="size">0kb</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="box">
+                    <h3>Preview</h3>
+                    <img src="" alt="" class="preview">
+                </div>
+
+                <div class="box">
+                    <h3>Controls</h3>
+                    <div class="controls">
+                        <input type="number" placeholder="Scale">
+                        <button onclick="start()">Start</button>
+                        <button onclick="location.reload()">Reload</button>
+                        <button onclick="save()">Save</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        const stats = {
+            gps: document.querySelector('[stat="gps"]'),
+            resolution: document.querySelector('[stat="resolution"]'),
+            size: document.querySelector('[stat="size"]'),
+        }
+
+        const scale_elem = document.querySelector('input[type="number"]');
+
+    </script>
+
+</body>
+
+</html>
