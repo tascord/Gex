@@ -21,35 +21,44 @@
             <h1>GICT &mdash; Gex Image Creation Tool</h1>
             <div class="container">
 
-                <div class="box">
-                    <h3>Stats</h3>
-                    <table class="stats">
-                        <tr>
-                            <th>G/s</th>
-                            <th>Square Gex Resolution</th>
-                            <th>Image Size</th>
-                        </tr>
-                        <tr>
-                            <td stat="gps">0</td>
-                            <td stat="resolution">0x0</td>
-                            <td stat="size">0kb</td>
-                        </tr>
-                    </table>
-                </div>
+                <div class="info">
 
-                <div class="box">
-                    <h3>Preview</h3>
-                    <img src="" alt="" class="preview">
-                </div>
-
-                <div class="box">
-                    <h3>Controls</h3>
-                    <div class="controls">
-                        <input type="number" placeholder="Scale">
-                        <button onclick="start()">Start</button>
-                        <button onclick="location.reload()">Reload</button>
-                        <button onclick="save()">Save</button>
+                    <div class="box">
+                        <h3>Stats</h3>
+                        <table class="stats">
+                            <tr>
+                                <th>Status</th>
+                                <th>G/s</th>
+                                <th>Rings Completed</th>
+                                <th>Percent Completed</th>
+                            </tr>
+                            <tr>
+                                <td stat="state">Idle</td>
+                                <td stat="gps">0</td>
+                                <td stat="rings">0</td>
+                                <td stat="percent">0%</td>
+                            </tr>
+                        </table>
                     </div>
+
+
+                    <div class="box">
+                        <h3>Controls</h3>
+                        <div class="controls">
+                            <input type="number" placeholder="Scale">
+                            <button onclick="start()">Start</button>
+                            <button onclick="save()">Save</button>
+                            <button onclick="paused = true">Pause</button>
+                            <button onclick="paused = false">Resume</button>
+                            <button onclick="reset()">Reset</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="box preview">
+                    <h3>Preview</h3>
+                    <canvas></canvas>
                 </div>
 
             </div>
@@ -57,15 +66,22 @@
         </div>
     </div>
 
+    <img src="/static/images/gex.png" style="display: none;">
+
     <script>
 
         const stats = {
+            state: document.querySelector('[stat="state"]'),
             gps: document.querySelector('[stat="gps"]'),
-            resolution: document.querySelector('[stat="resolution"]'),
-            size: document.querySelector('[stat="size"]'),
+            rings: document.querySelector('[stat="rings"]'),
+            percent: document.querySelector('[stat="percent"]'),
         }
 
+        const canvas = document.querySelector('canvas');
+        const context = canvas.getContext('2d');
+
         const scale_elem = document.querySelector('input[type="number"]');
+        const img = document.querySelector('img');
 
     </script>
 

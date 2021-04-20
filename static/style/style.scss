@@ -80,6 +80,26 @@ body {
             align-items: center;
             flex-wrap: wrap;
 
+            .info {
+                
+                height: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+
+                .box {
+                    width: 100%;
+                }
+
+            }
+
+            .controls {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+
             .box {
 
                 border: 2px solid var(--dark-not-black);
@@ -117,8 +137,9 @@ body {
 
 /* ————————————————————————————————— */
 
-.p5Canvas {
+canvas {
 
-    display: none;
+    width: 30vw;
+    // height: 10vh;
 
 }

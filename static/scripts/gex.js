@@ -1,35 +1,30 @@
 let width = 100, height = 100;
-let scale = 40;
+let scale = 100;
 
-let img;
-let canvas;
+// let img = new Image();
 
+let ready = true.;
 let paused = false;
 let started = false;
 let completed = false;
 
 let gex = 0;
 let time = 0;
-
-function setup() {
-    canvas = createCanvas(width * scale, height * scale);    
-}
-
-function preload() {
-    img = loadImage('./images/gex.png');
-}
+let since = 0;
 
 let index = 0;
 let ring = 1;
 
 async function draw_loop() {
 
+    let count = 0;
+
     for (let i_y = -ring + 1; i_y - 1 < ring; i_y++) {
         for (let i_x = -ring + 1; i_x - 1 < ring; i_x++) {
 
-            if(paused) await (() => new Promise((resolve) => {
+            if (paused) await (() => new Promise((resolve) => {
                 let _ = setInterval(() => {
-                    if(!paused) {
+                    if (!paused) {
                         resolve();
                         clearInterval(_);
                     }
@@ -41,33 +36,23 @@ async function draw_loop() {
 
             if (i_x != ring && i_x != -ring + 1 && i_y != ring && i_y != -ring + 1) continue;
 
-            image(img, x, y, width, height);
+            count++;
+
+            context.drawImage(img, x, y, width, height)
             gex++;
 
             continue;
 
-            // Draw Box
-            noStroke();
-            fill(ring * 20);
-            rect(x, y, width, height);
-
-
-            // Debug Text
-            fill('blue')
-            textAlign(CENTER);
-            textSize(10)
-            text(`${i_x},${i_y}`, x + (width / 2), y + 20)
-            fill('green')
-            text(`${ring}`, x + (width / 2), y + 30)
-
-
-
+        
         }
+
     }
+
+    console.log(`[O] Ring ${ring} completed. ${count} Gex's drawn.`);
 
     if (++ring > (scale / 2) + 1) {
         completed = true;
-        alert('Filled canvas.');
+        gex = 0;
     };
 
 
@@ -79,23 +64,45 @@ const save = () => {
     saveCanvas(canvas, `GEX-${scale}x${scale}`, 'png');
 }
 
-const start = async() => {
+const start = async () => {
 
-    if(started) return;
-    scale = scale.value || 10;
+    if(!ready) return;
+    if (started && !completed) return;
+
+    scale = parseInt(scale_elem.value) || 10;
+    if (isNaN(scale)) scale = 10;
+
+    canvas.width = width * scale;
+    canvas.height = height * scale;
 
     started = true;
     completed = false;
 
+    rings = 1, gex = 0, since = 0;
     time = Date.now();
 
-    while(!completed) await draw_loop();
+    let _ = setInterval(() => {
+        if (completed) clearInterval(_);
+        draw_loop();
+    });
 
 }
 
+const range = (value, in_min, in_max, out_min, out_max) => {
+    return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
+const reset = () => location.reload();
+
 setInterval(() => {
 
-    if(!started) return;
-    stats.gps.innerText = (gex / ((Date.now() - time) / 1000)).toFixed(1);
+    stats.state.innerText = started ? completed ? 'Completed' : paused ? 'Paused' : 'Working...' : 'Idle'
+    stats.percent.innerText = range(gex, 0, (scale * scale), 0, 100).toFixed(2) + '%';
+    stats.rings.innerText = ring;
+
+    if(completed) return;
+
+    stats.gps.innerText = (gex - since) / 4;
+    since = gex;
 
 }, 250);

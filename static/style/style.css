@@ -87,6 +87,37 @@ body:hover > section.hero {
       flex-wrap: wrap;
 }
 
+.main .inner .container .info {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main .inner .container .info .box {
+  width: 100%;
+}
+
+.main .inner .container .controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .main .inner .container .box {
   border: 2px solid var(--dark-not-black);
   padding: 0.5rem 1rem;
@@ -112,7 +143,7 @@ body:hover > section.hero {
 }
 
 /* ————————————————————————————————— */
-.p5Canvas {
-  display: none;
+canvas {
+  width: 30vw;
 }
 /*# sourceMappingURL=style.css.map */
